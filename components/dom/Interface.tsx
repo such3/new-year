@@ -37,12 +37,14 @@ export default function Interface() {
                 }}>
                     {/* Phase Indicator */}
                     <div style={{
-                        fontSize: '0.7rem',
+                        fontFamily: 'var(--font-cinzel)',
+                        fontSize: '0.9rem',
                         textTransform: 'uppercase',
-                        letterSpacing: '0.3em',
-                        color: '#aabfff',
-                        marginBottom: '1rem',
-                        opacity: 0.8
+                        letterSpacing: '0.4em',
+                        color: '#e0c090', // Muted gold
+                        marginBottom: '1.2rem',
+                        opacity: 0.9,
+                        textShadow: '0 2px 10px rgba(0,0,0,0.5)'
                     }}>
                         Phase {currentSection} — {section.title}
                     </div>
@@ -50,25 +52,27 @@ export default function Interface() {
                     <AnimatePresence mode="wait">
                         <motion.div
                             key={currentSection}
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -20 }}
-                            transition={{ duration: 0.8, ease: "easeOut" }}
+                            initial={{ opacity: 0, y: 10, filter: 'blur(10px)' }}
+                            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                            exit={{ opacity: 0, y: -10, filter: 'blur(5px)' }}
+                            transition={{ duration: 1.2, ease: [0.25, 0.4, 0.25, 1] }} // Cinematic easing
                         >
                             {section.text.map((line, index) => (
                                 <motion.p
                                     key={index}
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 1 }}
-                                    transition={{ delay: index * 0.5 + 0.3, duration: 1 }}
+                                    initial={{ opacity: 0, filter: 'blur(8px)' }}
+                                    animate={{ opacity: 1, filter: 'blur(0px)' }}
+                                    transition={{ delay: index * 0.8 + 0.2, duration: 1.5 }} // Slow reveals
                                     style={{
-                                        fontFamily: "'Inter', sans-serif",
-                                        fontSize: currentSection === 8 ? '2rem' : '1.6rem',
+                                        fontFamily: "'Playfair Display', serif", // Use the variable
+                                        fontSize: currentSection === 8 ? '2.2rem' : '1.8rem',
                                         color: section.id === 6 ? '#ffd700' : '#ffffff',
-                                        textShadow: '0 2px 4px rgba(0,0,0,0.9)',
-                                        margin: '0.4rem 0',
-                                        fontWeight: 400,
-                                        lineHeight: 1.4
+                                        textShadow: '0 2px 20px rgba(0,0,0,0.8)',
+                                        margin: '0.5rem 0',
+                                        fontWeight: 500,
+                                        lineHeight: 1.4,
+                                        letterSpacing: '0.02em',
+                                        fontStyle: 'italic'
                                     }}
                                 >
                                     {line}
@@ -76,6 +80,37 @@ export default function Interface() {
                             ))}
                         </motion.div>
                     </AnimatePresence>
+
+                    {/* Love Letter Link - Finale Only */}
+                    <AnimatePresence>
+                        {currentSection === 8 && (
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: 20 }}
+                                transition={{ delay: 2, duration: 1 }}
+                                style={{ marginTop: '2rem', pointerEvents: 'auto' }}
+                            >
+                                <a href="/letter" style={{
+                                    display: 'inline-block',
+                                    padding: '0.8rem 2rem',
+                                    border: '1px solid rgba(255, 215, 0, 0.5)',
+                                    color: '#ffd700',
+                                    fontFamily: 'var(--font-cinzel)',
+                                    fontSize: '0.9rem',
+                                    textTransform: 'uppercase',
+                                    letterSpacing: '0.2em',
+                                    textDecoration: 'none',
+                                    background: 'rgba(0,0,0,0.3)',
+                                    borderRadius: '2px',
+                                    transition: 'all 0.3s ease'
+                                }}>
+                                    ✉ Read My Letter
+                                </a>
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+
                 </div>
             </div>
 

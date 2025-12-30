@@ -33,8 +33,16 @@ function ScrollHandler() {
 
 export default function ScrollManager() {
     // pages = scroll length. 
+    // pages = scroll length.
+    // snap: locks to 1/pages. With 9 pages, it locks to each section.
+    // damping: 0.5 (heavy cinematic feel)
     return (
-        <ScrollControls pages={STORY_SECTIONS.length} damping={0.4}>
+        <ScrollControls
+            pages={STORY_SECTIONS.length}
+            damping={0.5}
+            // @ts-ignore
+            snap={{ mass: 4, tension: 150 }}
+        >
             <ScrollHandler />
         </ScrollControls>
     );

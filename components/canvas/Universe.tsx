@@ -1,6 +1,6 @@
 'use client';
 
-import { Stars, Float, Sparkles } from '@react-three/drei';
+import { Stars, Float, Sparkles, PresentationControls } from '@react-three/drei';
 import MainStars from './MainStars';
 import { useFrame } from '@react-three/fiber';
 import { useRef } from 'react';
@@ -37,15 +37,27 @@ export default function Universe() {
             <Sparkles count={300} scale={15} size={2} speed={0.4} opacity={0.5} noise={0.2} color="#fff8e7" />
 
             {/* The Main Narrative Elements - Lifted slightly for cinematic framing */}
-            <group position={[0, 1.2, 0]}>
-                <HeartParticles />
-                <Constellations />
-                <Planet />
-                <ProposalEffect />
-                <Float speed={2} rotationIntensity={0.2} floatIntensity={0.5}>
-                    <MainStars />
-                </Float>
-            </group>
+            {/* Wrapped in PresentationControls for interactive parallax */}
+            <PresentationControls
+                global={false}
+                cursor={false}
+                snap={true}
+                speed={1}
+                zoom={1}
+                rotation={[0, 0, 0]}
+                polar={[-0.1, 0.1]}
+                azimuth={[-0.1, 0.1]}
+            >
+                <group position={[0, 1.2, 0]}>
+                    <HeartParticles />
+                    <Constellations />
+                    <Planet />
+                    <ProposalEffect />
+                    <Float speed={2} rotationIntensity={0.2} floatIntensity={0.5}>
+                        <MainStars />
+                    </Float>
+                </group>
+            </PresentationControls>
         </group>
     );
 }

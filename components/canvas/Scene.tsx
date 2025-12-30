@@ -1,8 +1,9 @@
 'use client';
 
 import { Canvas } from '@react-three/fiber';
-import { EffectComposer, Bloom, Vignette } from '@react-three/postprocessing';
+import { EffectComposer, Bloom, Vignette, Noise, ChromaticAberration } from '@react-three/postprocessing';
 import { Suspense } from 'react';
+import * as THREE from 'three';
 import Universe from './Universe';
 import ScrollManager from './ScrollManager';
 
@@ -27,6 +28,8 @@ export default function Scene() {
                         intensity={0.8}
                         radius={0.4}
                     />
+                    <Noise opacity={0.02} />
+                    <ChromaticAberration offset={[new THREE.Vector2(0.002, 0.002)]} />
                     <Vignette eskil={false} offset={0.1} darkness={1.1} />
                 </EffectComposer>
             </Suspense>
