@@ -45,40 +45,40 @@ function Signature() {
                 display: 'inline-block'
             }}
         >
-            <svg width="600" height="150" viewBox="0 0 600 150" style={{ overflow: 'visible' }}>
+            <svg width="900" height="150" viewBox="0 0 900 150" style={{ overflow: 'visible' }}>
                 <defs>
-                    <linearGradient id="gold-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stopColor="#ffd700" />
-                        <stop offset="50%" stopColor="#ffec8b" />
-                        <stop offset="100%" stopColor="#ffd700" />
+                    <linearGradient id="lavender-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stopColor="#E6E6FA" />
+                        <stop offset="50%" stopColor="#D8BFD8" />
+                        <stop offset="100%" stopColor="#E6E6FA" />
                     </linearGradient>
 
                     <clipPath id="clip-chuchi">
                         <motion.rect
-                            x="0" y="0" width="300" height="150"
+                            x="0" y="0" width="400" height="150"
                             initial={{ width: 0 }}
-                            animate={{ width: 300 }}
+                            animate={{ width: 400 }}
                             transition={{ duration: 2.5, ease: "linear", delay: 0.5 }}
                         />
                     </clipPath>
                     <clipPath id="clip-giddu">
                         <motion.rect
-                            x="320" y="0" width="300" height="150"
+                            x="540" y="0" width="400" height="150"
                             initial={{ width: 0 }}
-                            animate={{ width: 300 }}
+                            animate={{ width: 400 }}
                             transition={{ duration: 2.5, ease: "linear", delay: 3.5 }}
                         />
                     </clipPath>
                 </defs>
 
-                {/* Chuchi - Left */}
+                {/* Chuchi - Left (Lavender) */}
                 <motion.text
-                    x="280"
+                    x="370" /* Gap of 80px from Emoji center 450-40=410? No. Emoji is center 450. */
                     y="75"
                     textAnchor="end"
                     dominantBaseline="middle"
-                    fill="url(#gold-gradient)"
-                    stroke="url(#gold-gradient)"
+                    fill="url(#lavender-gradient)"
+                    stroke="url(#lavender-gradient)"
                     strokeWidth="1.5"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -86,7 +86,7 @@ function Signature() {
                     style={{
                         fontFamily: 'var(--font-great-vibes)',
                         fontSize: '4.5rem',
-                        filter: 'drop-shadow(0 0 2px rgba(255, 215, 0, 0.3))'
+                        filter: 'drop-shadow(0 0 5px rgba(230, 230, 250, 0.5))'
                     }}
                     initial={{ fillOpacity: 0, strokeOpacity: 1 }}
                     animate={{ fillOpacity: 1, strokeOpacity: 0 }}
@@ -98,47 +98,27 @@ function Signature() {
                     Chuchi
                 </motion.text>
 
-                {/* Heart - Center */}
-                <motion.path
-                    d="M 300 65 C 280 50, 270 75, 280 95 L 300 115 L 320 95 C 330 75, 320 50, 300 65"
-                    fill="url(#gold-gradient)"
-                    stroke="url(#gold-gradient)"
-                    strokeWidth="2"
-                    initial={{ pathLength: 0, scale: 0, opacity: 0 }}
-                    animate={{ pathLength: 1, scale: 1, opacity: 1 }}
-                    transition={{
-                        pathLength: { duration: 1, delay: 2.8 },
-                        scale: { duration: 0.5, type: "spring", delay: 2.8 },
-                        opacity: { duration: 0.2, delay: 2.8 }
-                    }}
-                />
-
-                {/* Giddu - Right */}
+                {/* Heart - Center (Emoji) */}
                 <motion.text
-                    x="320"
-                    y="75"
-                    textAnchor="start"
+                    x="450"
+                    y="82" /* Nudge down slightly for optical alignment */
+                    textAnchor="middle"
                     dominantBaseline="middle"
-                    fill="url(#gold-gradient)"
-                    stroke="url(#gold-gradient)"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    clipPath="url(#clip-giddu)"
                     style={{
-                        fontFamily: 'var(--font-great-vibes)',
-                        fontSize: '4.5rem',
-                        filter: 'drop-shadow(0 0 2px rgba(255, 215, 0, 0.3))'
+                        fontSize: '3.5rem',
+                        filter: 'drop-shadow(0 0 10px rgba(255, 105, 180, 0.6))'
                     }}
-                    initial={{ fillOpacity: 0, strokeOpacity: 1 }}
-                    animate={{ fillOpacity: 1, strokeOpacity: 0 }}
+                    initial={{ scale: 0, opacity: 0 }}
+                    animate={{ scale: 1.2, opacity: 1 }}
                     transition={{
-                        fillOpacity: { duration: 1.5, delay: 5.5 },
-                        strokeOpacity: { duration: 1.5, delay: 5.5 }
+                        scale: { duration: 0.6, type: "spring", bounce: 0.5, delay: 2.8 },
+                        opacity: { duration: 0.3, delay: 2.8 }
                     }}
                 >
-                    Giddu
+                    💖
                 </motion.text>
+
+
             </svg>
         </motion.div>
     )
@@ -189,7 +169,7 @@ export default function LetterPage() {
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
-            padding: '4rem 2rem',
+            padding: '4rem 2rem', // Reduced side padding? No, kept it 2rem.
             overflowY: 'auto'
         }}>
             <LetterBackground />
